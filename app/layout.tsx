@@ -9,8 +9,13 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const defaultUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : "http://localhost:3000";
+const fallbackUrl = process.env.NEXT_PUBLIC_URL || defaultUrl;
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_URL!),
+  metadataBase: new URL(fallbackUrl),
   alternates: {
     canonical: "/",
     languages: {
@@ -34,7 +39,7 @@ export const metadata: Metadata = {
       "Free Invoice Generator: Create & Send Professional Invoices in Minutes",
     description:
       "Get paid on time with our free invoice maker. Create professional invoices & get them to clients instantly.",
-    url: process.env.NEXT_PUBLIC_URL,
+    url: fallbackUrl,
     type: "website",
     images: "/og-image.jpeg",
     siteName: "Invoice Generator",
